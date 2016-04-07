@@ -1,0 +1,23 @@
+apply from: 'http://dl.bintray.com/scalding/generic/waroverlay.gradle'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    mavenLocal()
+    mavenCentral artifactUrls: ['http://developer.jasig.org/repo/content/groups/m2-legacy/', 'http://central.maven.org/maven2/']
+    maven { url 'http://oss.sonatype.org/content/repositories/releases/' }
+}
+
+dependencies {
+    runtime("org.jasig.cas:cas-management-webapp:${project.'cas.version'}@war") {
+        transitive = true
+    }
+}
+
+war {
+    baseName 'cas-management'
+}
+
+//Just a helper to produce an exploded war, should one choose to use it
+war.doLast {
+    ant.unzip(src: war.archivePath, dest: "$buildDir/cas-management")
+}
