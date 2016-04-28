@@ -11,6 +11,7 @@ dependencies {
     runtime("org.jasig.cas:cas-server-webapp:${project.'cas.version'}@war") {
         transitive = true
     }
+    compile "org.jasig.cas:cas-server-core-events:${project.'cas.version'}"
 }
 
 war {
